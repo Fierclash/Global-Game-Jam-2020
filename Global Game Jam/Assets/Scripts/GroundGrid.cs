@@ -18,11 +18,12 @@ Functions:
 */
 public class GroundGrid : MonoBehaviour
 {
-	public static Vector2 gridSize = new Vector2(7, 7);			// Global variable of the grid dimensions
+	public static Vector2Int gridSize = new Vector2Int(7, 7);			// Global variable of the grid dimensions
 	public static float gridSpacing = 1f;						// Space between each point within the scene
 
 	[Header("Grid")]
 	public GameObject baseTile;									// Base Tile to initialize the grid with
+	public Player player;										// Player tile to initialize the grid with
 	public GameObject[,] gameGrid;						 		// Array of the ground grid
 
 	void Start()
@@ -31,11 +32,10 @@ public class GroundGrid : MonoBehaviour
 		SetGrid();
 	}
 
-
 	// Initializes the gameGrid with gameObjects of ground tiles
 	void InitGrid()
 	{
-		gameGrid = new GameObject[10, 10];
+		gameGrid = new GameObject[gridSize.x, gridSize.y];
 
 		for(int i=0; i < gridSize.x; i++)
 		{
@@ -75,5 +75,7 @@ public class GroundGrid : MonoBehaviour
 			for(int j=0; j<gridSize.y; j++) // 10
 				gameGrid[i,j].transform.position = gameGrid[i,j].GetComponent<GroundTile>().position * GroundGrid.gridSpacing;
 		}
+
+		player.InitPlayer(gameGrid, new Vector2Int(2, 2));
 	}
 }
