@@ -13,26 +13,31 @@ Notes:
 */
 public class GroundTile : MonoBehaviour
 {
-	public GroundObject baseGround;		// Base stats to initialize with
-	public Vector2 position;			// The position in the grid
-	int currentDurability;		// Determines if the player can/cannot walk on the tile
+    public GroundObject baseGround;     // Base stats to initialize with
+    public int brokenGround;   //Broken ground piece
+    public Vector2 position;            // The position in the grid
+    int currentDurability;      // Determines if the player can/cannot walk on the tile
 
-	void Start()
-	{
-		Repair(); // Initializes the tile's durability
-	}
+    void Start()
+    {
+        Repair(); // Initializes the tile's durability
+    }
 
-	void Repair() // Argument for a new GroundObject?
-	{
-		currentDurability = 1;
-	}
+    void Repair() // Argument for a new GroundObject?
+    {
+        currentDurability = 1;
+    }
 
-	public void DecrDurability()
-	{
-		if(currentDurability > 0) {
-			currentDurability--;
-		} else {
-			// Break
-		}
-	}
+    public void DecrDurability()
+    {
+        if (currentDurability > 0)
+        {
+            currentDurability--;
+        }
+        else
+        {
+            // Break
+            brokenGround = 1;
+        }
+    }
 }
