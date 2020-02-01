@@ -15,7 +15,7 @@ public class GroundTile : MonoBehaviour
 {
 	public GroundObject baseGround;		// Base stats to initialize with
 	public Vector2 position;			// The position in the grid
-	public int currentDurability;		// Determines if the player can/cannot walk on the tile
+	int currentDurability;		// Determines if the player can/cannot walk on the tile
 
 	void Start()
 	{
@@ -24,15 +24,15 @@ public class GroundTile : MonoBehaviour
 
 	void Repair() // Argument for a new GroundObject?
 	{
-		// Returns the currentDurability to max
+		currentDurability = 1;
 	}
 
 	public void DecrDurability()
 	{
-		currentDurability--;
-		if(currentDurability == 0)
-		{
-			// Break();
+		if(currentDurability > 0) {
+			currentDurability--;
+		} else {
+			// Break
 		}
 	}
 }

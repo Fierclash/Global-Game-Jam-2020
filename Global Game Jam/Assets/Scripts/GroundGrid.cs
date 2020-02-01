@@ -18,7 +18,7 @@ Functions:
 */
 public class GroundGrid : MonoBehaviour
 {
-	public static Vector2 gridSize = new Vector2(7, 7);		// Global variable of the grid dimensions
+	public static Vector2 gridSize = new Vector2(7, 7);			// Global variable of the grid dimensions
 	public static float gridSpacing = 1f;						// Space between each point within the scene
 
 	[Header("Grid")]
