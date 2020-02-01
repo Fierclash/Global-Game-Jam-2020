@@ -1,0 +1,50 @@
+TO DO LIST FOR GLOBAL GAME JAM 2020
+-----------------------------------
+
+[Base Components]
+
+- Grid System
+	- Hold and manage ground tile objects
+	- Needs ability to directly access any ground tile at (x,y)
+
+- Player
+	- Movement
+		- Snap to grid positions
+		- Cannot exceed grid bounds
+		- Ground Detection
+			- Determine which ground tiles are accessible
+	- Lose Conditionality
+		- Player is on a ground tile whose durability becomes 0 or less
+
+- Falling Objects
+	- Remove a ground tile from the grid / Mark a ground tile unwalkable
+	- Create a system that determines how ground tiles are removed
+
+[Polish]
+
+- Sprites
+	- Player
+	- Ground Tiles
+	- Falling Objects
+		- Broken Mast
+		- Cannon Balls
+
+- Score System
+	- Time Based
+
+- Sounds
+	- BGM
+	- SFX
+		- Walking
+		- Ground Tiles Breaking
+		- Player Death
+		- Ambience
+
+- Animations
+	- Player Walking
+		- Movement Between Tiles instead of Snapping
+	- Tweening
+		- Rotating Canon Balls
+
+- Quality of Life
+	- Replay Function
