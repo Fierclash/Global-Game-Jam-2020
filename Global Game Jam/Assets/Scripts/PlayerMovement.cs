@@ -16,7 +16,6 @@ public class PlayerMovement : MonoBehaviour
 	[HideInInspector] public GroundGrid grid;
 	private bool canMove = true;
 	public Vector2Int gridPosition;
-	public TextMeshProUGUI countText;
 	public int materialsCount = 15;
 	public Rigidbody2D body;
 

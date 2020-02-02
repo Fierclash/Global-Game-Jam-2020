@@ -48,6 +48,7 @@ MonoBehaviour:
   gridPosition: {x: 0, y: 0}
   countText: {fileID: 0}
   materialsCount: 1
+  body: {fileID: 8414993466870450640}
 --- !u!1 &8414993466870450646
 GameObject:
   m_ObjectHideFlags: 0
