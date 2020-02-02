@@ -42,7 +42,10 @@ public class GroundGrid : MonoBehaviour
 	public Vector2Int materialCount;
 
 	public GameObject warning;   //Broken ground piece
+
+	public int warningSeconds;
 	public GameObject logTemplate;
+	public GameObject cannon;
 
     private float startTime;
     public int keepScore = 0;
@@ -224,9 +227,12 @@ public class GroundGrid : MonoBehaviour
 	}
 
 	IEnumerator Damage(GroundTile target){
+		GameObject cannonBall = Instantiate(cannon, new Vector3(target.transform.position.x, target.transform.position.y + GroundGrid.gridSize.y, 0), Quaternion.identity);
+		cannonBall.GetComponent<CannonBall>().InitCannon(target.transform.position, warningSeconds);
         GameObject warningShot = Instantiate(warning, target.transform.position, Quaternion.identity);
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(warningSeconds);
         Destroy(warningShot.gameObject);
+		Destroy(cannonBall.gameObject);
 		if(target.DecrDurability()){
 			target.Break();
 			spawnMaterials(target);
