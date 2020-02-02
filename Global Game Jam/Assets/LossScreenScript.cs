@@ -7,20 +7,16 @@ public class LossScreenScript : MonoBehaviour
 {
     private Scene menuScene, currentScene;
 
-    void Start()
-    {
-        currentScene = SceneManager.GetActiveScene();
-
-    }
+    
 
     public void ResetGame()
     {
-        Application.LoadLevel(currentScene.name);
+        Application.LoadLevel(SceneManager.GetActiveScene().name);
     }
 
     public void LeaveLevel()
     {
-        Application.LoadLevel(menuScene.name);
+        Application.LoadLevel("Main Menu");
     }
 
 }
