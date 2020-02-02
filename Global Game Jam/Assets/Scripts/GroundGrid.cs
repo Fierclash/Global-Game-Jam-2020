@@ -27,6 +27,7 @@ public class GroundGrid : MonoBehaviour
     private int Rand1 = 0, Rand2 = 0;                           // random vars for tiles to smash
     //public GroundTile tilemap;                                  // groundtile variable to change between broken and fixed
 
+    public GameObject player;
 
 	[Header("Grid")]
 	public GameObject baseTile;									// Base Tile to initialize the grid with
@@ -43,6 +44,8 @@ public class GroundGrid : MonoBehaviour
 		InitGrid();
 		SetGrid();
 
+		GameObject placedPlayer = Instantiate(player, Vector3.zero, Quaternion.identity);// add player
+		placedPlayer.GetComponent<PlayerMovement>().gridPosition = Vector2Int.zero;
 
     	StartCoroutine(FireCannon());
 	}

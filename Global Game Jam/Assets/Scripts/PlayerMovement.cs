@@ -6,6 +6,12 @@ public class PlayerMovement : MonoBehaviour
 {
 	public GroundGrid grid;
 	private bool canMove = true;
+	public Vector2Int gridPosition;
+
+	void Start()
+	{
+		grid = FindObjectOfType<GroundGrid>();
+	}
 
 	void Update()
 	{
