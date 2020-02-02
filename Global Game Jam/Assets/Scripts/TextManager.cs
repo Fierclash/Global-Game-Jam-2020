@@ -33,7 +33,7 @@ public class TextManager : MonoBehaviour
 		else
 			Destroy(this);
 	}
-
+//boop
 	void Start()
 	{
 		UpdateScore(0);
