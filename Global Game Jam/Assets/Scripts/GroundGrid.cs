@@ -44,6 +44,9 @@ public class GroundGrid : MonoBehaviour
 	public GameObject warning;   //Broken ground piece
 	public GameObject logTemplate;
 
+    private float startTime;
+    public int keepScore = 0;
+
 	void Start()
 	{
 		InitGrid();
@@ -53,6 +56,11 @@ public class GroundGrid : MonoBehaviour
 		placedPlayer.GetComponent<PlayerMovement>().gridPosition = Vector2Int.zero;
 
     	StartCoroutine(FireCannon());
+
+        //time for score
+        //startTime = Time.time;
+        StartCoroutine(Timekeep());
+
 	}
 
 	// Initializes the gameGrid with gameObjects of ground tiles
@@ -139,17 +147,43 @@ public class GroundGrid : MonoBehaviour
 
     }
 
-    void FixedUpdate()
+    void Update()
     {
-    		/*
-        countTime++;
-        if (countTime == 60)
+        // keep score via time
+        float t = Time.time - startTime;
+
+       // keepScore = (int)(t % 60);
+
+        /*for (int i = 0; i < (t % 60); i++)
         {
-            TimeforSmash = true;
-            DestroyRandom();
-            countTime = 0;
-            TimeforSmash = false;
-        }*/
+            keepScore++;
+        }
+        */
+        /*
+        for (float i = 0; i < t; i++)
+        {
+            keepScore = (int)(i / 100f);
+        }
+        /*
+    countTime++;
+    if (countTime == 60)
+    {
+        TimeforSmash = true;
+        DestroyRandom();
+        countTime = 0;
+        TimeforSmash = false;
+    }*/
+    }
+
+    IEnumerator Timekeep()
+    {
+        while (true)
+        {
+         //   Debug.Log("YEEEE BOIIIIIII");
+            yield return new WaitForSeconds(1f);
+            keepScore++;
+
+        }
     }
 
     IEnumerator FireCannon()
