@@ -873,7 +873,7 @@ MonoBehaviour:
   baseTile: {fileID: 6614262364143596733, guid: 6cf4bd7a95ddbc54abafce8ddf2ff4f3,
     type: 3}
   availableTiles: []
-  fireRate: 1
+  fireRate: 1.5
   firing: 1
   materialCount: {x: 0, y: 2}
   warning: {fileID: 4000528105086540257, guid: e3e53eb532251be45978285c651aa4fc, type: 3}
@@ -1139,7 +1139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1978511399
 RectTransform:
   m_ObjectHideFlags: 0
