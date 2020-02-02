@@ -26,6 +26,12 @@ public class GroundTile : MonoBehaviour
         Repair(); // Initializes the tile's durability
     }
 
+    void FixedUpdate() {
+        if(log != null) {
+            log.GetComponent<Rigidbody2D>().velocity = (transform.position - log.transform.position) * 10;
+        }
+    }
+
     public void Repair() // Argument for a new GroundObject?
     {
         currentDurability = 1;
