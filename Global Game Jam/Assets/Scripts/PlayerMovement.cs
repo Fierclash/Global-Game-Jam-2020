@@ -19,7 +19,8 @@ public class PlayerMovement : MonoBehaviour
 	public int materialsCount = 15;
 	public Rigidbody2D body;
 
-	public AudioSource repairSound;
+	public AudioClip repairSound;
+	public AudioSource sound;
 
 	void Start()
 	{
@@ -83,8 +84,8 @@ public class PlayerMovement : MonoBehaviour
 				if(materialsCount > 0) // If the player has enough materials, repair the target tile
 				{
 					IncrMaterials(false);
+					sound.PlayOneShot(repairSound);
 					newTile.Repair(new Vector3(gridPosition.x, gridPosition.y, 0));
-					repairSound.Play();
 				}
 				grid.availableTiles.Add(newTile);
 				canMove = false;

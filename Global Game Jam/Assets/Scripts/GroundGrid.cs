@@ -50,6 +50,10 @@ public class GroundGrid : MonoBehaviour
     private float startTime;
     public int keepScore = 0;
 
+	public AudioSource sound;
+	public AudioClip breakSound;
+	public AudioClip splashSound;
+
 	void Start()
 	{
 		InitGrid();
@@ -240,8 +244,15 @@ public class GroundGrid : MonoBehaviour
 			target.Break();
 			spawnMaterials(target);
 			availableTiles.Remove(target);
+			StartCoroutine(playBreakAudio());
 		}
     }
+
+	IEnumerator playBreakAudio() {
+		sound.PlayOneShot(breakSound);
+		yield return new WaitForSeconds(0.2f);
+		sound.PlayOneShot(splashSound);
+	}
 
     public void spawnLog(Vector3 originalPos, GroundTile tile){
         tile.log = Instantiate(logTemplate, originalPos, Quaternion.identity);
