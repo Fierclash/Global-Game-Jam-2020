@@ -15,6 +15,7 @@ public class GroundTile : MonoBehaviour
 {
     public GroundObject baseGround;     // Base stats to initialize with
     public Sprite broken;   //Broken ground piece
+    public Sprite ground;   //ground piece sprite
     public Vector2 position;            // The position in the grid
     public int currentDurability;      // Determines if the player can/cannot walk on the tile
 
@@ -23,9 +24,10 @@ public class GroundTile : MonoBehaviour
         Repair(); // Initializes the tile's durability
     }
 
-    void Repair() // Argument for a new GroundObject?
+    public void Repair() // Argument for a new GroundObject?
     {
         currentDurability = 1;
+        GetComponent<SpriteRenderer>().sprite = ground;
     }
 
     public bool DecrDurability()
