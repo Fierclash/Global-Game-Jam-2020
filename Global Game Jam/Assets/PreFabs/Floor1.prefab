@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: 1812321451
   m_SortingLayer: -1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 80d61bd9578010c48a43e05491ee5f3c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b85395f4328658d429b895c15850f4ef, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -95,11 +95,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseGround: {fileID: 11400000, guid: cc7a86a220c9f224283562dbe1287f72, type: 2}
-  broken: {fileID: 21300000, guid: caa2f2ac30e74d64c88ea78d98504c5f, type: 3}
-  warning: {fileID: 4000528105086540257, guid: e3e53eb532251be45978285c651aa4fc, type: 3}
-  ground: {fileID: 21300000, guid: 80d61bd9578010c48a43e05491ee5f3c, type: 3}
+  broken: {fileID: 21300000, guid: a64d9f69a71a5284ba8696218ab24b41, type: 3}
+  hasItem: 0
+  ground: {fileID: 21300000, guid: b85395f4328658d429b895c15850f4ef, type: 3}
   position: {x: 0, y: 0}
   currentDurability: 0
-  logTemplate: {fileID: 8842706612422440743, guid: 26e17837144ec0b42ab228a9c5eefcc7,
-    type: 3}
   log: {fileID: 0}
