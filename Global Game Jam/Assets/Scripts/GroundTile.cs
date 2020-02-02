@@ -57,7 +57,11 @@ public class GroundTile : MonoBehaviour
         	return;
 
         if(player.gridPosition == position)
+        {
         	Destroy(player.gameObject);
+        	GeneralManager.instance.ShowLossScreen();
+        	Time.timeScale = 0f;
+        }
 
     }
 

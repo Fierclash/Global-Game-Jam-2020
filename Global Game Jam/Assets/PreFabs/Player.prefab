@@ -46,6 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grid: {fileID: 0}
   gridPosition: {x: 0, y: 0}
+  countText: {fileID: 0}
+  materialsCount: 1
 --- !u!1 &8414993466870450646
 GameObject:
   m_ObjectHideFlags: 0
