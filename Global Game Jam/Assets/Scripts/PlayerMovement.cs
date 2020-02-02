@@ -15,14 +15,29 @@ public class PlayerMovement : MonoBehaviour
 
 	void Update()
 	{
-		if(Input.anyKey && canMove)
-		{
+		/*
+		if(Input.GetAxisRaw("Horizontal") != Input.GetAxisRaw("Vertical") && Input.anyKey && canMove)
 			Move(new Vector2Int((int)Input.GetAxisRaw("Horizontal"), (int)Input.GetAxisRaw("Vertical")));
+		else if(!Input.anyKey)
+		{
+			canMove = true;
+		}
+		*/
+
+		int x = (int)Input.GetAxisRaw("Horizontal");
+		int y = (int)Input.GetAxisRaw("Vertical");
+		if(canMove)
+		{
+			if(y != 0)
+				Move(new Vector2Int(0, y));
+			else if(x != 0)
+				Move(new Vector2Int(x, 0));
 		}
 		else if(!Input.anyKey)
 		{
 			canMove = true;
 		}
+
 	}
 
 	void Move(Vector2Int newPosition)
