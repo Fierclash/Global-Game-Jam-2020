@@ -2,84 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MovingObject
 {
-
-    public Rigidbody2D rigidbody;
-    float movementSpeed = 40f;
-
-    int movement;
-    Vector2Int position;
-    GroundTile ground;
-
-    GameObject[,] grid;
-
-    bool movementCooldown;
-
     // Start is called before the first frame update
+    void Start ()
+    {
+        //Call the Start function of the MovingObject base class.
+        base.Start ();
+    }
 
-    public void InitPlayer(GameObject[,] grid, Vector2Int position) {
-        this.grid = grid;
-        this.position = position;
-        GroundTile ground = grid[position.x, position.y].GetComponent<GroundTile>();
-        this.ground = ground;
-        rigidbody.transform.position = ground.transform.position;
-        movementCooldown = false;
+    //AttemptMove overrides the AttemptMove function in the base class MovingObject
+    //AttemptMove takes a generic parameter T which for Player will be of the type Wall, it also takes integers for x and y direction to move in.
+    protected override void AttemptMove <T> (int xDir, int yDir)
+    {
+        //Call the AttemptMove method of the base class, passing in the component T (in this case Wall) and x and y direction to move.
+        base.AttemptMove <T> (xDir, yDir);
+        
+        //Hit allows us to reference the result of the Linecast done in Move.
+        RaycastHit2D hit;
+    }
+
+    //OnCantMove overrides the abstract function OnCantMove in MovingObject.
+    //It takes a generic parameter T which in the case of Player is a Wall which the player can attack and destroy.
+    protected override void OnCantMove <T> (T component)
+    {
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetAxisRaw("Horizontal") < 0) { // left
-            movement = 1;
-        } else if (Input.GetAxisRaw("Horizontal") > 0) { // right
-            movement = 2;
-        } else if (Input.GetAxisRaw("Vertical") > 0) { // up
-            movement = 3;
-        } else if (Input.GetAxisRaw("Vertical") < 0) { // down
-            movement = 4;
-        } else { // not moving
-            movement = 0;
-        }
-    }
-
-    void FixedUpdate() {
-        if (!movementCooldown) {
-            Move(movement);
-        }
-    }
-    
-    void Move(int direction) {
-        if (validMove(direction)) {
-            if (direction == 1) { // left
-                position.x -= 1;
-            } else if (direction == 2) { // right
-                position.x += 1;
-            } else if (direction == 3) { // up
-                position.y += 1;
-            } else if (direction == 4) { // down
-                position.y -= 1;
-            }
-            Debug.Log(position.ToString());
-            GroundTile ground = grid[position.x, position.y].GetComponent<GroundTile>();
-            this.ground = ground;
-            rigidbody.transform.position = ground.transform.position; // will be changed to an animation
-            movementCooldown = true;
-            new WaitForSeconds(3);
-            movementCooldown = false;
-        }
-    }
-
-    bool validMove(int direction) {
-        if (direction == 1) { // left
-            return position.x > 0;
-        } else if (direction == 2) { // right
-            return position.x < (grid.GetLength(0) - 1);
-        } else if (direction == 3) { // up
-            return position.y < (grid.GetLength(1) - 1);
-        } else if (direction == 4) { // down
-            return position.y > 0;
-        }
-        return false;
+        
     }
 }

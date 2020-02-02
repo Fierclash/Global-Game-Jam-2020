@@ -30,7 +30,7 @@ public class GroundGrid : MonoBehaviour
 	[Header("Grid")]
 	public GameObject baseTile;									// Base Tile to initialize the grid with
 
-	public Player player;										// Player tile to initialize the grid with
+	public PlayerOld player;										// Player tile to initialize the grid with
 	public GameObject[,] gameGrid;						 		// Array of the ground grid
 
 	void Start()
