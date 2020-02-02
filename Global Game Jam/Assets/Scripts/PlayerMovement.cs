@@ -81,7 +81,7 @@ public class PlayerMovement : MonoBehaviour
 				if(materialsCount > 0) // If the player has enough materials, repair the target tile
 				{
 					IncrMaterials(false);
-					newTile.Repair();
+					newTile.Repair(new Vector3(gridPosition.x, gridPosition.y, 0));
 				}
 				grid.availableTiles.Add(newTile);
 				canMove = false;

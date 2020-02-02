@@ -20,22 +20,35 @@ public class GroundTile : MonoBehaviour
     public Vector2 position;            // The position in the grid
     public int currentDurability;      // Determines if the player can/cannot walk on the tile
     [HideInInspector] public GameObject log;
+    [HideInInspector] public GameObject tempFloor;
+
+    public GameObject floorTemplate;
+
+    public int animationSpeed = 10;
 
     void Start()
     {
-        Repair(); // Initializes the tile's durability
+        currentDurability = 1;
     }
 
     void FixedUpdate() {
         if(log != null) {
-            log.GetComponent<Rigidbody2D>().velocity = (transform.position - log.transform.position) * 10;
+            log.GetComponent<Rigidbody2D>().velocity = (transform.position - log.transform.position) * animationSpeed;
+        }
+        if(tempFloor != null) {
+            tempFloor.GetComponent<Rigidbody2D>().velocity = (transform.position - tempFloor.transform.position) * animationSpeed;
+            if((transform.position - tempFloor.transform.position).sqrMagnitude < 0.001){
+                Destroy(tempFloor);
+                GetComponent<SpriteRenderer>().sprite = ground;
+            }
         }
     }
 
-    public void Repair() // Argument for a new GroundObject?
+    public void Repair(Vector3 position) // Argument for a new GroundObject?
     {
+        Debug.Log(position.ToString());
+        tempFloor = Instantiate(floorTemplate, position, Quaternion.identity);
         currentDurability = 1;
-        GetComponent<SpriteRenderer>().sprite = ground;
     }
 
     public bool DecrDurability()
