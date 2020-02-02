@@ -1,34 +1,42 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 /*
 GroundGrid:
-	Script to manage ground tiles within a grid configuration
+Script to manage ground tiles within a grid configuration
 
 Notes:
-	Game Grid: 2D array internally maintained in scripts 
-	Scene Grid: The configuration of ground tiles within the scene itself
-	Grid must communicate with the game object's positions
-	Player's position must interact with the grid
-	Tiles must be directly addressed to affect its state
+Game Grid: 2D array internally maintained in scripts 
+Scene Grid: The configuration of ground tiles within the scene itself
+Grid must communicate with the game object's positions
+Player's position must interact with the grid
+Tiles must be directly addressed to affect its state
 
 Functions:
-	InitGrid()
-	SetGrid()
+InitGrid()
+SetGrid()
 */
 public class GroundGrid : MonoBehaviour
 {
 	public static Vector2 gridSize = new Vector2(7, 7);			// Global variable of the grid dimensions
 	public static float gridSpacing = 1f;						// Space between each point within the scene
+    public int countTime = 0;                                   // timer to be used for update
+    public bool TimeforSmash = false;                        // break tile condition
+    private int Rand1 = 0, Rand2 = 0;                           // random vars for tiles to smash
+    public GroundTile tilemap;                                  // groundtile variable to change between broken and fixed
+
 
 	[Header("Grid")]
 	public GameObject baseTile;									// Base Tile to initialize the grid with
+    public GameObject destroyedTile;                            // Boken Tile
 	public GameObject[,] gameGrid;						 		// Array of the ground grid
 
 	void Start()
 	{
 		InitGrid();
 		SetGrid();
+
 	}
 
 
@@ -76,4 +84,34 @@ public class GroundGrid : MonoBehaviour
 				gameGrid[i,j].transform.position = gameGrid[i,j].GetComponent<GroundTile>().position * GroundGrid.gridSpacing;
 		}
 	}
+    void DestroyRandom()
+    {
+        // cycle through 0 to 48, select 3 tiles, break, set timer to 0
+        for (int i = 0; i < 3; i++)
+        {
+            Rand1 = Random.Range(0, 7);
+            Rand2 = Random.Range(0, 7);
+            if (gameGrid[Rand1, Rand2])
+            gameGrid[Rand1, Rand2].SetActive(false); //'disable' platform until reconstructed
+            gameGrid[Rand1, Rand2].GetComponent<Tilemap>();
+
+           /* if (gameGrid[Rand1, Rand2].SetActive(false))
+            {
+                gameGrid[Rand1, Rand2].
+            }
+            */
+        }
+
+    }
+    void FixedUpdate()
+    {
+        countTime++;
+        if (countTime == 360)
+        {
+            TimeforSmash = true;
+            DestroyRandom();
+            countTime = 0;
+            TimeforSmash = false;
+        }
+    }
 }
