@@ -185,6 +185,7 @@ public class GroundGrid : MonoBehaviour
          //   Debug.Log("YEEEE BOIIIIIII");
             yield return new WaitForSeconds(1f);
             keepScore++;
+            TextManager.instance.UpdateScore(keepScore);
 
         }
     }
@@ -204,7 +205,7 @@ public class GroundGrid : MonoBehaviour
 		for(int i = 0; i < numMaterials; i++){
 			if (list.Count > 0){
 				GroundTile tile = list[Random.Range(0, list.Count)];
-				spawnLog(tile);
+				spawnLog(target.transform.position, tile);
 				list.Remove(tile);
 			}
 		}
@@ -242,8 +243,8 @@ public class GroundGrid : MonoBehaviour
 		}
     }
 
-    public void spawnLog(GroundTile tile){
-        tile.log = Instantiate(logTemplate, tile.transform.position, Quaternion.identity);
+    public void spawnLog(Vector3 originalPos, GroundTile tile){
+        tile.log = Instantiate(logTemplate, originalPos, Quaternion.identity);
     }
 
 }

@@ -16,7 +16,6 @@ public class PlayerMovement : MonoBehaviour
 	[HideInInspector] public GroundGrid grid;
 	private bool canMove = true;
 	public Vector2Int gridPosition;
-	public TextMeshProUGUI countText;
 	public int materialsCount = 15;
 	public Rigidbody2D body;
 
@@ -49,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
 	void FixedUpdate() {
 		Vector3 currentPos = new Vector3(gridPosition.x, gridPosition.y);
 		body.velocity = (currentPos - transform.position)*15;
-		Debug.Log(currentPos.ToString() + "\n" + transform.position.ToString());
+		//Debug.Log(currentPos.ToString() + "\n" + transform.position.ToString());
 	}
 
 	void Move(Vector2Int newPosition)
@@ -82,7 +81,7 @@ public class PlayerMovement : MonoBehaviour
 				if(materialsCount > 0) // If the player has enough materials, repair the target tile
 				{
 					IncrMaterials(false);
-					newTile.Repair();
+					newTile.Repair(new Vector3(gridPosition.x, gridPosition.y, 0));
 				}
 				grid.availableTiles.Add(newTile);
 				canMove = false;
