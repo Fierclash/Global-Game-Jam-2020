@@ -190,7 +190,12 @@ public class GroundGrid : MonoBehaviour
             yield return new WaitForSeconds(1f);
             keepScore++;
             TextManager.instance.UpdateScore(keepScore);
-
+			if(keepScore % 10 == 0) {
+				fireRate+=0.1f;
+			}
+			if(keepScore % 200 == 0) {
+				cannonBallCount++;
+			}
         }
     }
 
