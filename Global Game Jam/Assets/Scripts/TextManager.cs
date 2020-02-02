@@ -2,7 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+/*
+TextManager:
+	Manages the UI text elements
 
+Functions:
+	UpdateScore(int)
+	UpdateMaterials(int)
+*/
 public class TextManager : MonoBehaviour
 {
 	public TextMeshProUGUI score;
@@ -25,11 +32,13 @@ public class TextManager : MonoBehaviour
 		UpdateMaterials(0);
 	}
 
+	// Updates the score UI
 	public void UpdateScore(int newScore)
 	{
-		score.text = "Score" +  newScore;
+		score.text = "Score: " +  newScore;
 	}
 
+	// Updates the materials UI
 	public void UpdateMaterials(int count)
 	{
 		materials.text = "Materials: " + count;

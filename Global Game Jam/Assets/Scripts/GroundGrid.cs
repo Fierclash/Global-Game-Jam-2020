@@ -14,8 +14,8 @@ Player's position must interact with the grid
 Tiles must be directly addressed to affect its state
 
 Functions:
-InitGrid()
-SetGrid()
+	InitGrid()
+	SetGrid()
 */
 public class GroundGrid : MonoBehaviour
 {
