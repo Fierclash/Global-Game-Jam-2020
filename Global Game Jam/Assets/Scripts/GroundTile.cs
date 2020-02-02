@@ -77,7 +77,7 @@ public class GroundTile : MonoBehaviour
 
         if(player.gridPosition == position)
         {
-        	Destroy(player.gameObject);
+        	player.gameObject.SetActive(false);
         	GeneralManager.instance.ShowLossScreen();
             TextManager.instance.FixingThemBoards();
             Time.timeScale = 0f;
