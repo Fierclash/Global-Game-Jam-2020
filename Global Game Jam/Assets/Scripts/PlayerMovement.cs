@@ -19,6 +19,8 @@ public class PlayerMovement : MonoBehaviour
 	public int materialsCount = 15;
 	public Rigidbody2D body;
 
+	public AudioSource repairSound;
+
 	void Start()
 	{
 		grid = FindObjectOfType<GroundGrid>();
@@ -82,6 +84,7 @@ public class PlayerMovement : MonoBehaviour
 				{
 					IncrMaterials(false);
 					newTile.Repair(new Vector3(gridPosition.x, gridPosition.y, 0));
+					repairSound.Play();
 				}
 				grid.availableTiles.Add(newTile);
 				canMove = false;

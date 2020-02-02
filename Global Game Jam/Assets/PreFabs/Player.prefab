@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2994262099283311884}
   - component: {fileID: 4537424922316299197}
   - component: {fileID: 7922681705369878463}
+  - component: {fileID: -2917556112772505463}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -49,6 +50,8 @@ MonoBehaviour:
   gridPosition: {x: 0, y: 0}
   materialsCount: 1
   body: {fileID: 4537424922316299197}
+  repairSound: {fileID: 8956942513833728919, guid: 109942799b30fa34d959e0b0accb5471,
+    type: 3}
 --- !u!50 &4537424922316299197
 Rigidbody2D:
   serializedVersion: 4
@@ -120,3 +123,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!81 &-2917556112772505463
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8414993466178635144}
+  m_Enabled: 1
