@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerMovement : MonoBehaviour
 {
 	public GroundGrid grid;
 	private bool canMove = true;
 	public Vector2Int gridPosition;
+	public TextMeshProUGUI countText;
+
+	private int materialsCount = 0;
 
 	void Start()
 	{
@@ -53,7 +57,12 @@ public class PlayerMovement : MonoBehaviour
 		
 				// Detect grid boundaries and broken tiles
 			} else {
-				newTile.Repair();
+				if(materialsCount > 0)
+				{
+					materialsCount--;
+					TextManager.instance.UpdateMaterials(materialsCount);
+					newTile.Repair();
+				}
 				grid.availableTiles.Add(newTile);
 				canMove = false;
 			}

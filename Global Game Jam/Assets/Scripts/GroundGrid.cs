@@ -60,7 +60,7 @@ public class GroundGrid : MonoBehaviour
 		{
 			for(int j=0; j < gridSize.y; j++)
 			{
-				Debug.Log("Iteration " + i + " " + j);
+				//Debug.Log("Iteration " + i + " " + j);
 
 				GameObject newTile = Instantiate(baseTile);
 				GroundTile groundTile = newTile.GetComponent<GroundTile>();
