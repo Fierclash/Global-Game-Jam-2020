@@ -17,8 +17,8 @@ public class PlayerMovement : MonoBehaviour
 	private bool canMove = true;
 	public Vector2Int gridPosition;
 	public TextMeshProUGUI countText;
-
 	public int materialsCount = 15;
+	public Rigidbody2D body;
 
 	void Start()
 	{
@@ -46,8 +46,20 @@ public class PlayerMovement : MonoBehaviour
 
 	}
 
+	void FixedUpdate() {
+		Vector3 currentPos = new Vector3(gridPosition.x, gridPosition.y);
+		body.velocity = (currentPos - transform.position)*15;
+		Debug.Log(currentPos.ToString() + "\n" + transform.position.ToString());
+	}
+
 	void Move(Vector2Int newPosition)
 	{ 
+		if (newPosition.x > 0) {
+			GetComponent<SpriteRenderer>().flipX = true;
+		} else {
+			GetComponent<SpriteRenderer>().flipX = false;
+		}
+
 		// Calculates the projected position
 		newPosition.x += gridPosition.x;
 		newPosition.y += gridPosition.y;
@@ -57,7 +69,6 @@ public class PlayerMovement : MonoBehaviour
 			GroundTile newTile = grid.gameGrid[newPosition.x, newPosition.y].GetComponent<GroundTile>();
 			if (newTile.currentDurability > 0) {
 				gridPosition = newPosition;
-				transform.position = new Vector3Int(newPosition.x, newPosition.y, 0);
 				canMove = false;
 		
 				if(newTile.log != null)

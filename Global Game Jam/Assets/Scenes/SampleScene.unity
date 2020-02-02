@@ -358,8 +358,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3, y: 3, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 7, y: 3.5, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -778,10 +778,13 @@ MonoBehaviour:
   availableTiles: []
   fireRate: 1
   firing: 1
-  materialCount: {x: 1, y: 2}
+  materialCount: {x: 0, y: 2}
   warning: {fileID: 4000528105086540257, guid: e3e53eb532251be45978285c651aa4fc, type: 3}
+  warningSeconds: 1
   logTemplate: {fileID: 8842706612422440743, guid: 26e17837144ec0b42ab228a9c5eefcc7,
     type: 3}
+  cannon: {fileID: 5881600006057888419, guid: 0961f8c8528fa864fad2a6027e64a1b3, type: 3}
+  keepScore: 0
 --- !u!4 &1314635502
 Transform:
   m_ObjectHideFlags: 0

@@ -19,7 +19,7 @@ Functions:
 */
 public class GroundGrid : MonoBehaviour
 {
-	public static Vector2Int gridSize = new Vector2Int(7, 7);			// Global variable of the grid dimensions
+	public static Vector2Int gridSize = new Vector2Int(14,7);			// Global variable of the grid dimensions
 	public static float gridSpacing = 1f;						// Space between each point within the scene
     public int countTime = 0;                                   // timer to be used for update
     public bool TimeforSmash = false;                        // break tile condition
@@ -42,7 +42,10 @@ public class GroundGrid : MonoBehaviour
 	public Vector2Int materialCount;
 
 	public GameObject warning;   //Broken ground piece
+
+	public int warningSeconds;
 	public GameObject logTemplate;
+	public GameObject cannon;
 
     private float startTime;
     public int keepScore = 0;
@@ -197,10 +200,12 @@ public class GroundGrid : MonoBehaviour
 
 	void spawnMaterials(GroundTile target){
 		List<GroundTile> list = getAdjacentAvailableTiles(target);
-		int numMaterials = Random.Range(materialCount.x, materialCount.y);
+		int numMaterials = Random.Range(materialCount.x, materialCount.y + 1);
 		for(int i = 0; i < numMaterials; i++){
 			if (list.Count > 0){
-				spawnLog(list[Random.Range(0, list.Count)]);
+				GroundTile tile = list[Random.Range(0, list.Count)];
+				spawnLog(tile);
+				list.Remove(tile);
 			}
 		}
 	}
@@ -209,8 +214,8 @@ public class GroundGrid : MonoBehaviour
 		List<GroundTile> list = new List<GroundTile>();
 		Vector2Int position = new Vector2Int((int)tile.transform.position.x, (int)tile.transform.position.y);
 
-		for(int x = -1; x <= 1; x+=2) {
-			for(int y = -1; y <= 1; y+=2) {
+		for(int x = -1; x <= 1; x+=1) {
+			for(int y = -1; y <= 1; y+=1) {
 				try {
 					GroundTile newTile = gameGrid[position.x + x, position.y + y].GetComponent<GroundTile>();
 					if (newTile.currentDurability > 0 && newTile.log == null){
@@ -224,9 +229,12 @@ public class GroundGrid : MonoBehaviour
 	}
 
 	IEnumerator Damage(GroundTile target){
+		GameObject cannonBall = Instantiate(cannon, new Vector3(target.transform.position.x, target.transform.position.y + GroundGrid.gridSize.y, 0), Quaternion.identity);
+		cannonBall.GetComponent<CannonBall>().InitCannon(target.transform.position, warningSeconds);
         GameObject warningShot = Instantiate(warning, target.transform.position, Quaternion.identity);
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(warningSeconds);
         Destroy(warningShot.gameObject);
+		Destroy(cannonBall.gameObject);
 		if(target.DecrDurability()){
 			target.Break();
 			spawnMaterials(target);
