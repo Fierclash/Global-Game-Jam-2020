@@ -48,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
 	void FixedUpdate() {
 		Vector3 currentPos = new Vector3(gridPosition.x, gridPosition.y);
 		body.velocity = (currentPos - transform.position)*15;
-		Debug.Log(currentPos.ToString() + "\n" + transform.position.ToString());
+		//Debug.Log(currentPos.ToString() + "\n" + transform.position.ToString());
 	}
 
 	void Move(Vector2Int newPosition)

@@ -65,6 +65,7 @@ public class TextManager : MonoBehaviour
         hiScore.text = "High Score: " + number.ToString();
 
         // if new score is higher, change
+        Debug.Log(PlayerPrefs.GetInt("HighScore", 0));
         if (number > PlayerPrefs.GetInt("HighScore", 0))
         {
             PlayerPrefs.SetInt("HighScore", number);
