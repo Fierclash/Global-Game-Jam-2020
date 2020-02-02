@@ -14,8 +14,8 @@ Player's position must interact with the grid
 Tiles must be directly addressed to affect its state
 
 Functions:
-InitGrid()
-SetGrid()
+	InitGrid()
+	SetGrid()
 */
 public class GroundGrid : MonoBehaviour
 {
@@ -62,7 +62,7 @@ public class GroundGrid : MonoBehaviour
 		{
 			for(int j=0; j < gridSize.y; j++)
 			{
-				Debug.Log("Iteration " + i + " " + j);
+				//Debug.Log("Iteration " + i + " " + j);
 
 				GameObject newTile = Instantiate(baseTile);
 				GroundTile groundTile = newTile.GetComponent<GroundTile>();

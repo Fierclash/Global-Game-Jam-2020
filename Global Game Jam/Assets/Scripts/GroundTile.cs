@@ -15,7 +15,7 @@ public class GroundTile : MonoBehaviour
 {
     public GroundObject baseGround;     // Base stats to initialize with
     public Sprite broken;   //Broken ground piece
-
+    public bool hasItem;
     public GameObject warning;   //Broken ground piece
     public Sprite ground;   //ground piece sprite
     public Vector2 position;            // The position in the grid
@@ -36,7 +36,7 @@ public class GroundTile : MonoBehaviour
 
     public bool DecrDurability()
     {
-        Debug.Log("Damaging a Tile");
+        //Debug.Log("Damaging a Tile");
 
         if(currentDurability > 0)
         {   
