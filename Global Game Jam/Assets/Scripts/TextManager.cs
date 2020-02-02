@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
+
 /*
 TextManager:
 	Manages the UI text elements
@@ -17,8 +19,14 @@ public class TextManager : MonoBehaviour
 
 	public static TextManager instance;
 
-	// Singleton
-	void Awake()
+    public TextMeshProUGUI hiScore;
+    public TextMeshProUGUI hScore;
+    public GroundGrid groundgrid;
+
+
+
+    // Singleton
+    void Awake()
 	{
 		if(instance == null)
 			instance = this;
@@ -30,7 +38,12 @@ public class TextManager : MonoBehaviour
 	{
 		UpdateScore(0);
 		UpdateMaterials(0);
-	}
+
+        FixingThemBoards();
+
+
+        hScore.text = "High Score: " + PlayerPrefs.GetInt("HighScore").ToString();
+    }
 
 	// Updates the score UI
 	public void UpdateScore(int newScore)
@@ -43,4 +56,29 @@ public class TextManager : MonoBehaviour
 	{
 		materials.text = "Materials: " + count;
 	}
+
+    public void FixingThemBoards()
+    {
+
+        int number = groundgrid.keepScore;
+//        Debug.Log(number);
+        hiScore.text = "High Score: " + number.ToString();
+
+        // if new score is higher, change
+        if (number > PlayerPrefs.GetInt("HighScore", 0))
+        {
+            PlayerPrefs.SetInt("HighScore", number);
+            hScore.text = "High Score: " + number.ToString();
+        }
+        
+    }
+
+    public void Reset()
+    {
+        PlayerPrefs.DeleteAll();
+        hScore.text = "0";
+    }
+
+
+
 }
