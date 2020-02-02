@@ -19,7 +19,7 @@ Functions:
 */
 public class GroundGrid : MonoBehaviour
 {
-	public static Vector2Int gridSize = new Vector2Int(7, 7);			// Global variable of the grid dimensions
+	public static Vector2Int gridSize = new Vector2Int(14,7);			// Global variable of the grid dimensions
 	public static float gridSpacing = 1f;						// Space between each point within the scene
     public int countTime = 0;                                   // timer to be used for update
     public bool TimeforSmash = false;                        // break tile condition
