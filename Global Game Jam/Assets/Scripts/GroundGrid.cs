@@ -39,6 +39,8 @@ public class GroundGrid : MonoBehaviour
 
 	public bool firing = true;
 
+	public Vector2Int materialCount;
+
 	void Start()
 	{
 		InitGrid();
@@ -123,6 +125,7 @@ public class GroundGrid : MonoBehaviour
            	int length = availableTiles.Count;
            	GroundTile target = availableTiles[Random.Range(0, length)];
            	if(target.DecrDurability())
+			   	spawnMaterials(target);
            		availableTiles.Remove(target);
 
 
@@ -156,6 +159,35 @@ public class GroundGrid : MonoBehaviour
     		yield return new WaitForSeconds(1f / fireRate);
     	}
     }
+
+	void spawnMaterials(GroundTile target){
+		List<GroundTile> list = getAdjacentAvailableTiles(target);
+		int numMaterials = Random.Range(materialCount.x, materialCount.y);
+		for(int i = 0; i < numMaterials; i++){
+			if (list.Count > 0){
+				list[Random.Range(0, list.Count)].spawnLog();
+			}
+		}
+	}
+
+	List<GroundTile> getAdjacentAvailableTiles(GroundTile tile) {
+		List<GroundTile> list = new List<GroundTile>();
+		Vector2Int position = new Vector2Int((int)tile.transform.position.x, (int)tile.transform.position.y);
+
+		for(int x = -1; x <= 1; x+=2) {
+			for(int y = -1; y <= 1; y+=2) {
+				try {
+					GroundTile newTile = gameGrid[position.x + x, position.y + y].GetComponent<GroundTile>();
+					if (tile.currentDurability > 0 && tile.log == null){
+						list.Add(newTile);
+					}
+				} catch {
+				}
+			}
+		}
+
+		return list;
+	}
 }
 
 

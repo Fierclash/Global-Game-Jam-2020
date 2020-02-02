@@ -20,6 +20,8 @@ public class GroundTile : MonoBehaviour
     public Sprite ground;   //ground piece sprite
     public Vector2 position;            // The position in the grid
     public int currentDurability;      // Determines if the player can/cannot walk on the tile
+    public GameObject logTemplate;
+    [HideInInspector] public GameObject log;
 
     void Start()
     {
@@ -54,5 +56,9 @@ public class GroundTile : MonoBehaviour
         currentDurability--;
         GetComponent<SpriteRenderer>().sprite = broken;
         Destroy(warningShot.gameObject);
+    }
+
+    public void spawnLog(){
+        log = Instantiate(logTemplate, transform.position, Quaternion.identity);
     }
 }
