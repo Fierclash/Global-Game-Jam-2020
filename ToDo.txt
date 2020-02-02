@@ -3,22 +3,22 @@ TO DO LIST FOR GLOBAL GAME JAM 2020
 
 [Base Components]
 
-- Grid System
-	- Hold and manage ground tile objects
-	- Needs ability to directly access any ground tile at (x,y)
+O Grid System
+	O Hold and manage ground tile objects
+	O Needs ability to directly access any ground tile at (x,y)
 
 - Player
-	- Movement
-		- Snap to grid positions
-		- Cannot exceed grid bounds
-		- Ground Detection
-			- Determine which ground tiles are accessible
+	O Movement
+		O Snap to grid positions
+		O Cannot exceed grid bounds
+		O Ground Detection
+			O Determine which ground tiles are accessible
 	- Lose Conditionality
 		- Player is on a ground tile whose durability becomes 0 or less
 
-- Falling Objects
-	- Remove a ground tile from the grid / Mark a ground tile unwalkable
-	- Create a system that determines how ground tiles are removed
+O Falling Objects
+	O Remove a ground tile from the grid / Mark a ground tile unwalkable
+	O Create a system that determines how ground tiles are removed
 
 [Polish]
 
