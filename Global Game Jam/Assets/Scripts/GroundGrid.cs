@@ -185,6 +185,7 @@ public class GroundGrid : MonoBehaviour
          //   Debug.Log("YEEEE BOIIIIIII");
             yield return new WaitForSeconds(1f);
             keepScore++;
+            TextManager.instance.UpdateScore(keepScore);
 
         }
     }
