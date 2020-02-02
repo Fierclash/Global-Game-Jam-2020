@@ -204,7 +204,7 @@ public class GroundGrid : MonoBehaviour
 		for(int i = 0; i < numMaterials; i++){
 			if (list.Count > 0){
 				GroundTile tile = list[Random.Range(0, list.Count)];
-				spawnLog(tile);
+				spawnLog(target, tile);
 				list.Remove(tile);
 			}
 		}
@@ -242,8 +242,8 @@ public class GroundGrid : MonoBehaviour
 		}
     }
 
-    public void spawnLog(GroundTile tile){
-        tile.log = Instantiate(logTemplate, tile.transform.position, Quaternion.identity);
+    public void spawnLog(GroundTile origin, GroundTile tile){
+        tile.log = Instantiate(logTemplate, origin.transform.position, Quaternion.identity);
     }
 
 }
