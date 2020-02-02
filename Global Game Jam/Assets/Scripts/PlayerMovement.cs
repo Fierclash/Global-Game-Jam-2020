@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
 	public Vector2Int gridPosition;
 	public TextMeshProUGUI countText;
 
-	private int materialsCount = 15;
+	public int materialsCount = 15;
 
 	void Start()
 	{
@@ -60,17 +60,31 @@ public class PlayerMovement : MonoBehaviour
 				transform.position = new Vector3Int(newPosition.x, newPosition.y, 0);
 				canMove = false;
 		
+				if(newTile.log != null)
+				{
+					Destroy(newTile.log);
+					IncrMaterials();
+				}
+
 				// Detect grid boundaries and broken tiles
 			} else {
 				if(materialsCount > 0) // If the player has enough materials, repair the target tile
 				{
-					materialsCount--;
-					TextManager.instance.UpdateMaterials(materialsCount);
+					IncrMaterials(false);
 					newTile.Repair();
 				}
 				grid.availableTiles.Add(newTile);
 				canMove = false;
 			}
 		}
+	}
+
+	void IncrMaterials(bool add = true)
+	{
+		if(add)
+			materialsCount++;
+		else
+			materialsCount--;
+		TextManager.instance.UpdateMaterials(materialsCount);
 	}
 }

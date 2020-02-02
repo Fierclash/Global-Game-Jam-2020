@@ -50,6 +50,15 @@ public class GroundTile : MonoBehaviour
 
     public void Break(){
         GetComponent<SpriteRenderer>().sprite = broken;
+        Destroy(log);
+
+        PlayerMovement player = FindObjectOfType<PlayerMovement>();
+        if(player == null) // First must error check if there is a player
+        	return;
+
+        if(player.gridPosition == position)
+        	Destroy(player.gameObject);
+
     }
 
 }
