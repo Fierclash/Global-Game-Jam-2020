@@ -37,7 +37,7 @@ public class GroundTile : MonoBehaviour
         }
         if(tempFloor != null) {
             tempFloor.GetComponent<Rigidbody2D>().velocity = (transform.position - tempFloor.transform.position) * animationSpeed;
-            if((transform.position - tempFloor.transform.position).sqrMagnitude < 0.005){
+            if((transform.position - tempFloor.transform.position).sqrMagnitude < 0.001){
                 Destroy(tempFloor);
                 GetComponent<SpriteRenderer>().sprite = ground;
             }
