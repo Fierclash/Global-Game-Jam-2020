@@ -79,7 +79,8 @@ public class GroundTile : MonoBehaviour
         {
         	Destroy(player.gameObject);
         	GeneralManager.instance.ShowLossScreen();
-        	Time.timeScale = 0f;
+            TextManager.instance.FixingThemBoards();
+            Time.timeScale = 0f;
         }
 
     }

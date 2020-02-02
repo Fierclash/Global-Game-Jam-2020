@@ -39,8 +39,6 @@ public class TextManager : MonoBehaviour
 		UpdateScore(0);
 		UpdateMaterials(0);
 
-        FixingThemBoards();
-
 
         hScore.text = "High Score: " + PlayerPrefs.GetInt("HighScore").ToString();
     }
