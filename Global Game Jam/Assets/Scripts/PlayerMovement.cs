@@ -45,12 +45,17 @@ public class PlayerMovement : MonoBehaviour
 		newPosition.x += gridPosition.x;
 		newPosition.y += gridPosition.y;
 		if (newPosition.x >= 0 && newPosition.x < GroundGrid.gridSize.x && newPosition.y >= 0 && newPosition.y < GroundGrid.gridSize.y) {
-			if (grid.gameGrid[newPosition.x, newPosition.y].GetComponent<GroundTile>().currentDurability > 0) {
+			GroundTile newTile = grid.gameGrid[newPosition.x, newPosition.y].GetComponent<GroundTile>();
+			if (newTile.currentDurability > 0) {
 				gridPosition = newPosition;
 				transform.position = new Vector3Int(newPosition.x, newPosition.y, 0);
 				canMove = false;
 		
 				// Detect grid boundaries and broken tiles
+			} else {
+				newTile.Repair();
+				grid.availableTiles.Add(newTile);
+				canMove = false;
 			}
 		}
 	}
