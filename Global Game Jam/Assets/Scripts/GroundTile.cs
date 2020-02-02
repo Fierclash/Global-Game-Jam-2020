@@ -16,7 +16,7 @@ public class GroundTile : MonoBehaviour
     public GroundObject baseGround;     // Base stats to initialize with
     public Sprite broken;   //Broken ground piece
     public Vector2 position;            // The position in the grid
-    int currentDurability;      // Determines if the player can/cannot walk on the tile
+    public int currentDurability;      // Determines if the player can/cannot walk on the tile
 
     void Start()
     {
