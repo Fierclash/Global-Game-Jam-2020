@@ -734,6 +734,9 @@ MonoBehaviour:
   fireRate: 1
   firing: 1
   materialCount: {x: 1, y: 2}
+  warning: {fileID: 4000528105086540257, guid: e3e53eb532251be45978285c651aa4fc, type: 3}
+  logTemplate: {fileID: 8842706612422440743, guid: 26e17837144ec0b42ab228a9c5eefcc7,
+    type: 3}
 --- !u!4 &1314635502
 Transform:
   m_ObjectHideFlags: 0

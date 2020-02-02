@@ -16,11 +16,9 @@ public class GroundTile : MonoBehaviour
     public GroundObject baseGround;     // Base stats to initialize with
     public Sprite broken;   //Broken ground piece
     public bool hasItem;
-    public GameObject warning;   //Broken ground piece
     public Sprite ground;   //ground piece sprite
     public Vector2 position;            // The position in the grid
     public int currentDurability;      // Determines if the player can/cannot walk on the tile
-    public GameObject logTemplate;
     [HideInInspector] public GameObject log;
 
     void Start()
@@ -39,10 +37,10 @@ public class GroundTile : MonoBehaviour
         //Debug.Log("Damaging a Tile");
 
         if(currentDurability > 0)
-        {   
-            if(currentDurability == 1)
+        {
+            currentDurability--;
+            if(currentDurability == 0)
             {
-                StartCoroutine(Damage());
                 return true;
             }
         }
@@ -50,15 +48,8 @@ public class GroundTile : MonoBehaviour
         return false;
     }
 
-    IEnumerator Damage(){
-        GameObject warningShot = Instantiate(warning, transform.position, Quaternion.identity);
-        yield return new WaitForSeconds(1);
-        currentDurability--;
+    public void Break(){
         GetComponent<SpriteRenderer>().sprite = broken;
-        Destroy(warningShot.gameObject);
     }
 
-    public void spawnLog(){
-        log = Instantiate(logTemplate, transform.position, Quaternion.identity);
-    }
 }

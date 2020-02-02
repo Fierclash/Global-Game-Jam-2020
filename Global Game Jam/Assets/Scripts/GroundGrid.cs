@@ -41,6 +41,9 @@ public class GroundGrid : MonoBehaviour
 
 	public Vector2Int materialCount;
 
+	public GameObject warning;   //Broken ground piece
+	public GameObject logTemplate;
+
 	void Start()
 	{
 		InitGrid();
@@ -124,9 +127,7 @@ public class GroundGrid : MonoBehaviour
 
            	int length = availableTiles.Count;
            	GroundTile target = availableTiles[Random.Range(0, length)];
-           	if(target.DecrDurability())
-			   	spawnMaterials(target);
-           		availableTiles.Remove(target);
+			StartCoroutine(Damage(target));
 
 
            /* if (gameGrid[Rand1, Rand2].SetActive(false))
@@ -165,7 +166,7 @@ public class GroundGrid : MonoBehaviour
 		int numMaterials = Random.Range(materialCount.x, materialCount.y);
 		for(int i = 0; i < numMaterials; i++){
 			if (list.Count > 0){
-				list[Random.Range(0, list.Count)].spawnLog();
+				spawnLog(list[Random.Range(0, list.Count)]);
 			}
 		}
 	}
@@ -178,16 +179,31 @@ public class GroundGrid : MonoBehaviour
 			for(int y = -1; y <= 1; y+=2) {
 				try {
 					GroundTile newTile = gameGrid[position.x + x, position.y + y].GetComponent<GroundTile>();
-					if (tile.currentDurability > 0 && tile.log == null){
+					if (newTile.currentDurability > 0 && newTile.log == null){
 						list.Add(newTile);
 					}
 				} catch {
 				}
 			}
 		}
-
 		return list;
 	}
+
+	IEnumerator Damage(GroundTile target){
+        GameObject warningShot = Instantiate(warning, target.transform.position, Quaternion.identity);
+        yield return new WaitForSeconds(1);
+        Destroy(warningShot.gameObject);
+		if(target.DecrDurability()){
+			target.Break();
+			spawnMaterials(target);
+			availableTiles.Remove(target);
+		}
+    }
+
+    public void spawnLog(GroundTile tile){
+        tile.log = Instantiate(logTemplate, tile.transform.position, Quaternion.identity);
+    }
+
 }
 
 
