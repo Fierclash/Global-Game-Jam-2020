@@ -96,7 +96,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseGround: {fileID: 11400000, guid: cc7a86a220c9f224283562dbe1287f72, type: 2}
   broken: {fileID: 21300000, guid: caa2f2ac30e74d64c88ea78d98504c5f, type: 3}
-  warning: {fileID: 21300000, guid: 4a1668579cc52a94488ae4d14218b5b1, type: 3}
+  warning: {fileID: 4000528105086540257, guid: e3e53eb532251be45978285c651aa4fc, type: 3}
   ground: {fileID: 21300000, guid: 80d61bd9578010c48a43e05491ee5f3c, type: 3}
   position: {x: 0, y: 0}
   currentDurability: 0

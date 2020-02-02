@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
 		{
 			if(y != 0)
 				Move(new Vector2Int(0, y));
-			else if(x != 0)
+			if(x != 0)
 				Move(new Vector2Int(x, 0));
 		}
 		else if(!Input.anyKey)
