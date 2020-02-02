@@ -23,27 +23,35 @@ public class GroundGrid : MonoBehaviour
 	public static float gridSpacing = 1f;						// Space between each point within the scene
     public int countTime = 0;                                   // timer to be used for update
     public bool TimeforSmash = false;                        // break tile condition
+    public int cannonBallCount = 3;
     private int Rand1 = 0, Rand2 = 0;                           // random vars for tiles to smash
-    public GroundTile tilemap;                                  // groundtile variable to change between broken and fixed
+    //public GroundTile tilemap;                                  // groundtile variable to change between broken and fixed
 
 
 	[Header("Grid")]
 	public GameObject baseTile;									// Base Tile to initialize the grid with
+	public List<GroundTile> availableTiles;
 
-	public PlayerOld player;										// Player tile to initialize the grid with
+	//public PlayerOld player;										// Player tile to initialize the grid with
 	public GameObject[,] gameGrid;						 		// Array of the ground grid
+	public float fireRate = 1f;
+
+	public bool firing = true;
 
 	void Start()
 	{
 		InitGrid();
 		SetGrid();
 
+
+    	StartCoroutine(FireCannon());
 	}
 
 	// Initializes the gameGrid with gameObjects of ground tiles
 	void InitGrid()
 	{
 		gameGrid = new GameObject[gridSize.x, gridSize.y];
+		availableTiles = new List<GroundTile>();
 
 		for(int i=0; i < gridSize.x; i++)
 		{
@@ -53,6 +61,7 @@ public class GroundGrid : MonoBehaviour
 
 				GameObject newTile = Instantiate(baseTile);
 				GroundTile groundTile = newTile.GetComponent<GroundTile>();
+				availableTiles.Add(groundTile);
 
 				/*
 				if(groundTile == null)
@@ -84,18 +93,35 @@ public class GroundGrid : MonoBehaviour
 				gameGrid[i,j].transform.position = gameGrid[i,j].GetComponent<GroundTile>().position * GroundGrid.gridSpacing;
 		}
 
-		player.InitPlayer(gameGrid, new Vector2Int(2, 2));
+		///player.InitPlayer(gameGrid, new Vector2Int(2, 2));
 	}
+
     void DestroyRandom()
     {
         // cycle through 0 to 48, select 3 tiles, break, set timer to 0
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < cannonBallCount; i++)
         {
-            Rand1 = Random.Range(0, 7);
-            Rand2 = Random.Range(0, 7);
-            if (gameGrid[Rand1, Rand2])
-            gameGrid[Rand1, Rand2].SetActive(false); //'disable' platform until reconstructed
+        	/*
+            Rand1 = Random.Range(0, gridSize.x);
+            Rand2 = Random.Range(0, gridSize.y);
+
+            if(gameGrid[Rand1, Rand2])
+           		gameGrid[Rand1, Rand2].GetComponent<GroundTile>().DecrDurability(); //'disable' platform until reconstructed
+
             gameGrid[Rand1, Rand2].GetComponent<Tilemap>();
+			*/
+            ////
+            if(availableTiles.Count == 0 || availableTiles == null)
+            {
+            	Debug.LogWarning("No more available tiles");
+            	return;
+            }
+
+           	int length = availableTiles.Count;
+           	GroundTile target = availableTiles[Random.Range(0, length)];
+           	if(target.DecrDurability())
+           		availableTiles.Remove(target);
+
 
            /* if (gameGrid[Rand1, Rand2].SetActive(false))
             {
@@ -105,15 +131,28 @@ public class GroundGrid : MonoBehaviour
         }
 
     }
+
     void FixedUpdate()
     {
+    		/*
         countTime++;
-        if (countTime == 360)
+        if (countTime == 60)
         {
             TimeforSmash = true;
             DestroyRandom();
             countTime = 0;
             TimeforSmash = false;
-        }
+        }*/
+    }
+
+    IEnumerator FireCannon()
+    {
+    	while(firing)
+    	{
+    		DestroyRandom();
+    		yield return new WaitForSeconds(1f / fireRate);
+    	}
     }
 }
+
+

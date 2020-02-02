@@ -30,14 +30,15 @@ public class BoardManager : MonoBehaviour
     public GameObject[] outerWallTiles;								//Array of outer tile prefabs.
     
     private Transform boardHolder;									//A variable to store a reference to the transform of our Board object.
-    private List <Vector3> gridPositions = new List <Vector3> ();	//A list of possible locations to place tiles.
+    private List <Vector3> activeTiles = new List <Vector3> ();	//A list of possible locations to place tiles.
     
+    public GameObject[,] gameGrid;                              // Array of the ground grid
     
-    //Clears our list gridPositions and prepares it to generate a new board.
+    //Clears our list activeTiles and prepares it to generate a new board.
     void InitialiseList ()
     {
-        //Clear our list gridPositions.
-        gridPositions.Clear ();
+        //Clear our list activeTiles.
+        activeTiles.Clear ();
         
         //Loop through x axis (columns).
         for(int x = 1; x < columns-1; x++)
@@ -46,11 +47,22 @@ public class BoardManager : MonoBehaviour
             for(int y = 1; y < rows-1; y++)
             {
                 //At each index add a new Vector3 to our list with the x and y coordinates of that position.
-                gridPositions.Add (new Vector3(x, y, 0f));
+                activeTiles.Add (new Vector3(x, y, 0f));
             }
         }
     }
-    
+    /*
+    Grid System:
+    Have both a grid and a list of active tiles
+
+    Player:
+        Move onto an index (x,y)
+        Check index in matrix
+
+        Each tile has health
+        0 health is consider broken and remove from the list of active and add to list of broken tiles
+    */
+
     
     //Sets up the outer walls and floor (background) of the game board.
     void BoardSetup ()
@@ -82,17 +94,17 @@ public class BoardManager : MonoBehaviour
     }
     
     
-    //RandomPosition returns a random position from our list gridPositions.
+    //RandomPosition returns a random position from our list activeTiles.
     Vector3 RandomPosition ()
     {
-        //Declare an integer randomIndex, set it's value to a random number between 0 and the count of items in our List gridPositions.
-        int randomIndex = Random.Range (0, gridPositions.Count);
+        //Declare an integer randomIndex, set it's value to a random number between 0 and the count of items in our List activeTiles.
+        int randomIndex = Random.Range (0, activeTiles.Count);
         
-        //Declare a variable of type Vector3 called randomPosition, set it's value to the entry at randomIndex from our List gridPositions.
-        Vector3 randomPosition = gridPositions[randomIndex];
+        //Declare a variable of type Vector3 called randomPosition, set it's value to the entry at randomIndex from our List activeTiles.
+        Vector3 randomPosition = activeTiles[randomIndex];
         
         //Remove the entry at randomIndex from the list so that it can't be re-used.
-        gridPositions.RemoveAt (randomIndex);
+        activeTiles.RemoveAt (randomIndex);
         
         //Return the randomly selected Vector3 position.
         return randomPosition;
@@ -126,7 +138,7 @@ public class BoardManager : MonoBehaviour
         //Creates the outer walls and floor.
         BoardSetup();
         
-        //Reset our list of gridpositions.
+        //Reset our list of activeTiles.
         InitialiseList ();
         
         //Instantiate a random number of food tiles based on minimum and maximum, at randomized positions.

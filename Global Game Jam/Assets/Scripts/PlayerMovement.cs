@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+	public GroundGrid grid;
 	private bool canMove = true;
 
 	void Update()
@@ -22,5 +23,7 @@ public class PlayerMovement : MonoBehaviour
 	{
 		transform.position = transform.position + newPosition;
 		canMove = false;
+	
+		// Detect grid boundaries and broken tiles
 	}
 }
